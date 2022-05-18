@@ -9,7 +9,6 @@ setup:
 	php artisan migrate
 	php artisan db:seed
 	npm ci
-	npm run dev
 
 watch:
 	npm run watch
@@ -33,10 +32,10 @@ deploy:
 	git push heroku
 
 lint:
-	composer phpcs
+	composer exec phpcs -- --standard=PSR12 app routes tests
 
 lint-fix:
-	composer phpcbf
+	composer exec --verbose phpcbf -- --standard=PSR12 app routes tests
 
 compose:
 	docker-compose up
