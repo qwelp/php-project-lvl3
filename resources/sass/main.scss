@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.search__wrap {
+    width: 500px;
+}
