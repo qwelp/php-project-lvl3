@@ -3,20 +3,19 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class UrlControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private array $data;
     private int $id;
 
     protected function setUp(): void
     {
         parent::setUp();
+        \Artisan::call('migrate');
+        \Artisan::call('db:seed');
 
         $this->data = [
             'name' => 'https://mvideo.ru',
