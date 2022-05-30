@@ -8,46 +8,46 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-  services:
-    postgres:
-      image: postgres:12.9
-      env:
-        POSTGRES_DATABASE: hexlet
-        POSTGRES_PASSWORD: dl032nh
-        POSTGRES_USER: root
-        POSTGRES_HOST: 127.0.0.1
-      ports:
-        - 5432:5432
-      # Set health checks to wait until postgres has started
-      options: >-
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+    services:
+      postgres:
+        image: postgres:12.9
+        env:
+          POSTGRES_DATABASE: hexlet
+          POSTGRES_PASSWORD: dl032nh
+          POSTGRES_USER: root
+          POSTGRES_HOST: localhost
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-  steps:
-    - uses: actions/checkout@v1
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
 
-    - name: PHP Security Checker
-      uses: StephaneBour/actions-php-security-checker@1.1
+      - name: PHP Security Checker
+        uses: StephaneBour/actions-php-security-checker@1.1
 
-    - name: Setup project
-      run: make setup
+      - name: Setup project
+        run: make setup
 
-    - name: Check lint
-      run: make lint
+      - name: Check lint
+        run: make lint
 
-    - name: Execute tests via PHPUnit
-      run: make test
-    - name: Show test coverage
-      uses: paambaati/codeclimate-action@v2.6.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      with:
-        coverageCommand: make test-coverage
-        coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
-        debug: true
+      - name: Execute tests via PHPUnit
+        run: make test
+      - name: Show test coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: make test-coverage
+          coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
+          debug: true
