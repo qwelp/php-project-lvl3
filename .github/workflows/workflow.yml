@@ -24,30 +24,30 @@ jobs:
         --health-interval 10s
         --health-timeout 5s
         --health-retries 5
-        
-    steps:
-      - uses: actions/checkout@v1
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
 
-      - name: PHP Security Checker
-        uses: StephaneBour/actions-php-security-checker@1.1
+  steps:
+    - uses: actions/checkout@v1
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
 
-      - name: Setup project
-        run: make setup
+    - name: PHP Security Checker
+      uses: StephaneBour/actions-php-security-checker@1.1
 
-      - name: Check lint
-        run: make lint
+    - name: Setup project
+      run: make setup
 
-      - name: Execute tests via PHPUnit
-        run: make test
-      - name: Show test coverage
-        uses: paambaati/codeclimate-action@v2.6.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
-          coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
-          debug: true
+    - name: Check lint
+      run: make lint
+
+    - name: Execute tests via PHPUnit
+      run: make test
+    - name: Show test coverage
+      uses: paambaati/codeclimate-action@v2.6.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+        coverageCommand: make test-coverage
+        coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
+        debug: true
