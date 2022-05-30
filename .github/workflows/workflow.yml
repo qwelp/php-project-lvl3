@@ -12,11 +12,11 @@ jobs:
       postgres:
         image: postgres:12.9
         env:
-          POSTGRES_DATABASE: hexlet
+          POSTGRES_DATABASE: postgres
           POSTGRES_PASSWORD: dl032nh
           POSTGRES_USER: root
         ports:
-          - 5432:5432
+          - 5432
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
