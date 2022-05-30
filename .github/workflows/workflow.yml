@@ -15,7 +15,6 @@ jobs:
           POSTGRES_DATABASE: hexlet
           POSTGRES_PASSWORD: dl032nh
           POSTGRES_USER: root
-          POSTGRES_HOST: localhost
         ports:
           - 5432:5432
         # Set health checks to wait until postgres has started
