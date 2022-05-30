@@ -12,6 +12,7 @@ jobs:
       postgres:
         image: postgres
         env:
+          POSTGRES_USER: root
           POSTGRES_PASSWORD: dl032nh
           POSTGRES_DB: hexlet
         options: >-
