@@ -14,8 +14,6 @@ class UrlControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        \Artisan::call('migrate');
-        \Artisan::call('db:seed');
 
         $this->data = [
             'name' => 'https://mvideo.ru',
