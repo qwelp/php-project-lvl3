@@ -2,21 +2,20 @@ name: PHP CI
 
 on:
   pull_request:
+    branches:
+      - 'main'
   push:
+    branches:
+      - 'main'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
+      - uses: actions/checkout@v2
 
       - name: PHP Security Checker
-        uses: StephaneBour/actions-php-security-checker@1.1
+        uses: StephaneBour/actions-php-security-checker@1.0
 
       - name: Setup project
         run: make setup
@@ -24,13 +23,5 @@ jobs:
       - name: Check lint
         run: make lint
 
-      - name: Execute tests via PHPUnit
+      - name: Execute tests
         run: make test
-      - name: Show test coverage
-        uses: paambaati/codeclimate-action@v2.6.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
-          coverageLocations: ${{ github.workplace }}/build/logs/clover.xml:clover
-          debug: true
