@@ -7,8 +7,6 @@ use App\Http\Requests\Url\StoreRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-use function PHPUnit\Framework\exactly;
-
 class StoreController extends Controller
 {
     public function __invoke(StoreRequest $request)
@@ -16,8 +14,8 @@ class StoreController extends Controller
         $data = array_map(fn ($value) => $value, $request->validated()['url']);
         $data['created_at'] = Carbon::now();
 
-        extract(parse_url($data['name']));
-        $normalizedUrl = strtolower("{$scheme}://{$host}");
+        $parsedUrl = parse_url($data['name']);
+        $normalizedUrl = strtolower("{$parsedUrl['scheme']}://{$parsedUrl['host']}");
 
         $url = DB::table('urls')->where('name', $normalizedUrl)->first();
 
