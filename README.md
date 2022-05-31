@@ -2,4 +2,4 @@
 [![Actions Status](https://github.com/qwelp/php-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/qwelp/php-project-lvl3/actions)
 
 ## Heroku
-http://aqueous-sierra-67552.herokuapp.com/public/
+http://aqueous-sierra-67552.herokuapp.com/
