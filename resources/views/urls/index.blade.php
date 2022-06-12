@@ -17,7 +17,7 @@
                         <tr>
                             <td>{{$url->id}}</td>
                             <td>
-                                <a href="{{route('url.show', $url->id)}}">{{ $url->name }}</a>
+                                <a href="{{route('urls.show', $url->id)}}">{{ $url->name }}</a>
                             </td>
                             <td>{{$url->created_at}}</td>
                         </tr>

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Url;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
@@ -11,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use GuzzleHttp\Exception\RequestException;
 
-class CheckController extends Controller
+class UrlCheckController extends Controller
 {
-    public function __invoke(int $id)
+    public function store(int $id)
     {
         $url = DB::table('urls')->find($id);
         abort_unless($url, 404);
@@ -37,6 +36,6 @@ class CheckController extends Controller
         } catch (RequestException | HttpClientException | ConnectionException $exception) {
             flash(message: $exception->getMessage())->error();
         }
-        return redirect()->route('url.show', ['id' => $id]);
+        return redirect()->route('urls.show', ['url' => $id]);
     }
 }

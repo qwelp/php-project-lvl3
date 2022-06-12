@@ -19,7 +19,7 @@
             </tr>
         </table>
         <h2 class="mt-5 mb-3">{{ __('messages.Checks') }}</h2>
-        {{ Form::open(['url' => route('url.check.store', [$url->id])]) }}
+        {{ Form::open(['url' => route('urls.checks.store', [$url->id])]) }}
         {{ Form::submit(__('messages.Run check'), ['class' => 'btn btn-primary mb-3']) }}
         {{ Form::close() }}
         <table class="table table-bordered table-hover text-nowrap">

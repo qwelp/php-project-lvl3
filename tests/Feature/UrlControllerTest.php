@@ -25,13 +25,13 @@ class UrlControllerTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->get(route('url.index'));
+        $response = $this->get(route('urls.index'));
         $response->assertOk();
     }
 
     public function testStore()
     {
-        $response = $this->followingRedirects()->get(route('url.show', $this->id));
+        $response = $this->followingRedirects()->get(route('urls.show', $this->id));
         $response->assertSessionHasNoErrors();
         $response->assertOk();
         $response->assertSeeText($this->data['name']);
@@ -40,7 +40,7 @@ class UrlControllerTest extends TestCase
 
     public function testShow()
     {
-        $response = $this->get(route('url.show', ['id' => $this->id]));
+        $response = $this->get(route('urls.show', ['url' => $this->id]));
         $response->assertOk();
         $response->assertSeeText($this->data['name']);
     }

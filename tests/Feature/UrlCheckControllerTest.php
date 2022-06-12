@@ -41,7 +41,7 @@ class UrlCheckControllerTest extends TestCase
             'created_at' => Carbon::now()
         ];
 
-        $response = $this->post(route('url.check.store', $id));
+        $response = $this->post(route('urls.checks.store', $id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('url_checks', $expectedData);

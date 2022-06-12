@@ -8,7 +8,7 @@ class IndexTest extends TestCase
 {
     public function testHome(): void
     {
-        $response = $this->get(route('index'));
+        $response = $this->get(route('home'));
         $response->assertOk();
     }
 }
