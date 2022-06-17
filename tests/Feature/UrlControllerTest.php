@@ -32,22 +32,16 @@ class UrlControllerTest extends TestCase
 
     public function testStore()
     {
-        $name = 'https://hexlet.io';
         $data = [
             'url' => [
-                'name' => $name
+                'name' => $this->data['name']
             ]
         ];
 
-        $dataValid = [
-            'name' => $name
-        ];
-
         $response = $this->post(route('urls.store'), $data);
-        $element = DB::table('urls')->where('name', $name)->first();
-        $response->assertRedirect(route('urls.show', ['url' => $element->id]));
+        $response->assertRedirect(route('urls.show', ['url' => $this->id]));
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('urls', $dataValid);
+        $this->assertDatabaseHas('urls', ['name' => $this->data['name']]);
     }
 
     public function testShow()
