@@ -10,20 +10,8 @@ use DiDom\Document;
 
 class UrlCheckControllerTest extends TestCase
 {
-    private array $data;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->data = [
-            'name' => 'https://google.com',
-            'created_at' => Carbon::now(),
-        ];
-    }
-
     public function testStore()
     {
-
         $name = 'https://hexlet.io';
         $urlId = DB::table('urls')->insertGetId(
             [
