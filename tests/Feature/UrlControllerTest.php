@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Url;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -31,11 +32,22 @@ class UrlControllerTest extends TestCase
 
     public function testStore()
     {
-        $response = $this->followingRedirects()->get(route('urls.show', $this->id));
+        $name = 'https://hexlet.io';
+        $data = [
+            'url' => [
+                'name' => $name
+            ]
+        ];
+
+        $dataValid = [
+            'name' => $name
+        ];
+
+        $response = $this->post(route('urls.store'), $data);
+        $element = DB::table('urls')->where('name', $name)->first();
+        $response->assertRedirect(route('urls.show', ['url' => $element->id]));
         $response->assertSessionHasNoErrors();
-        $response->assertOk();
-        $response->assertSeeText($this->data['name']);
-        $this->assertDatabaseHas('urls', $this->data);
+        $this->assertDatabaseHas('urls', $dataValid);
     }
 
     public function testShow()
