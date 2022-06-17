@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class homeTest extends TestCase
+class HomeTest extends TestCase
 {
     public function testHome(): void
     {
