@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Url;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -40,13 +39,13 @@ class UrlControllerTest extends TestCase
         ];
 
         $response = $this->post(route('urls.store'), $data);
-        $urlId = DB::table('urls')->where('name', $domen)->first()->id;
+        $urlId = (int) DB::table('urls')->where('name', $domen)->first()->id;
         $response->assertRedirect(route('urls.show', ['url' => $urlId]));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('urls', ['name' => $domen]);
     }
 
-    public function testShow()
+    public function testShow(): void
     {
         $response = $this->get(route('urls.show', ['url' => $this->id]));
         $response->assertOk();
