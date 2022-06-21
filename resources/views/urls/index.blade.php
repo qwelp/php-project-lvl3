@@ -11,6 +11,7 @@
                     <th>ID</th>
                     <th>Имя</th>
                     <th>Последняя проверка</th>
+                    <th>Код ответа</th>
                 </tr>
                 @if ($urls)
                     @foreach($urls as $url)
@@ -20,6 +21,7 @@
                                 <a href="{{route('urls.show', $url->id)}}">{{ $url->name }}</a>
                             </td>
                             <td>{{$url->created_at}}</td>
+                            <td>{{$url->status_code}}</td>
                         </tr>
                     @endforeach
                 @endif
