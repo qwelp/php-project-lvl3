@@ -19,7 +19,7 @@ class UrlCheckControllerTest extends TestCase
         $urlId = DB::table('urls')->insertGetId(
             [
                 'name' => $name,
-                'created_at' => Carbon::now('Europe/Moscow')
+                'created_at' => Carbon::now()
             ]
         );
 

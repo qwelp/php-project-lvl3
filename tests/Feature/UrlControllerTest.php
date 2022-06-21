@@ -18,7 +18,7 @@ class UrlControllerTest extends TestCase
 
         $this->data = [
             'name' => 'https://mvideo.ru',
-            'created_at' => Carbon::now('Europe/Moscow'),
+            'created_at' => Carbon::now(),
         ];
 
         $this->id = DB::table('urls')->insertGetId($this->data);
