@@ -18,7 +18,7 @@ class UrlControllerTest extends TestCase
 
         $this->data = [
             'name' => 'https://mvideo.ru',
-            'created_at' => Carbon::now(),
+            'created_at' => Carbon::now('Europe/Moscow'),
         ];
 
         $this->id = DB::table('urls')->insertGetId($this->data);
@@ -32,16 +32,18 @@ class UrlControllerTest extends TestCase
 
     public function testStore()
     {
+        $domen = 'https://hexlet.io';
         $data = [
             'url' => [
-                'name' => $this->data['name']
+                'name' => $domen
             ]
         ];
 
         $response = $this->post(route('urls.store'), $data);
-        $response->assertRedirect(route('urls.show', ['url' => $this->id]));
+        $postData = DB::table('urls')->where('name', $domen)->first();
+        $response->assertRedirect(route('urls.show', ['url' => $postData->id]));
         $response->assertSessionHasNoErrors();
-        $this->assertDatabaseHas('urls', ['name' => $this->data['name']]);
+        $this->assertDatabaseHas('urls', ['name' => $domen]);
     }
 
     public function testShow()

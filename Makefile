@@ -20,7 +20,7 @@ log:
 	tail -f storage/logs/laravel.log
 
 test:
-	php artisan test
+	php artisan test --testsuite=Feature --stop-on-failure
 
 test-coverage:
 	XDEBUG_MODE=coverage php artisan test --coverage-clover build/logs/clover.xml

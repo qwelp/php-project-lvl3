@@ -3,10 +3,8 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Tests\TestCase;
-use DiDom\Document;
 
 class UrlCheckControllerTest extends TestCase
 {
@@ -16,22 +14,16 @@ class UrlCheckControllerTest extends TestCase
         $urlId = DB::table('urls')->insertGetId(
             [
                 'name' => $name,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now('Europe/Moscow')
             ]
         );
 
-        $response = Http::get($name);
-        $document = new Document($response->body());
-        $h1 = optional($document->first('h1'))->text();
-        $title = optional($document->first('title'))->text();
-        $description = optional($document->first('meta[name=description]'))->getAttribute('content');
-
         $expectedData = [
-            'url_id' => $urlId,
-            'status_code' => $response->status(),
-            'h1' => $h1,
-            'title' => $title,
-            'description' => $description
+            "url_id" => 1,
+            "status_code" => 200,
+            "h1" => "Онлайн-школа программирования, за выпускниками которой охотятся компании\n",
+            "title" => "Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов",
+            "description" => "Живое онлайн сообщество программистов и разработчиков на JS, Python, Java, PHP, Ruby. Авторские программы обучения с практикой и готовыми проектами в резюме. Помощь в трудоустройстве после успешного окончания обучения"
         ];
 
         $response = $this->post(route('urls.checks.store', $urlId));
