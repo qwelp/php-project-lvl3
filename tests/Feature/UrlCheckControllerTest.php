@@ -15,7 +15,7 @@ class UrlCheckControllerTest extends TestCase
 
     public function testStore()
     {
-        $name = 'https://hexlet.io';
+        $name = 'https://ru.hexlet.io';
         $urlId = DB::table('urls')->insertGetId(
             [
                 'name' => $name,
