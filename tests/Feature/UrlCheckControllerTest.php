@@ -8,6 +8,11 @@ use Tests\TestCase;
 
 class UrlCheckControllerTest extends TestCase
 {
+    private function getFilePath(string $name): string
+    {
+        return __DIR__ . '/../fixtures/' . $name;
+    }
+
     public function testStore()
     {
         $name = 'https://hexlet.io';
@@ -23,7 +28,7 @@ class UrlCheckControllerTest extends TestCase
             "status_code" => 200,
             "h1" => "Онлайн-школа программирования, за выпускниками которой охотятся компании\n",
             "title" => "Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов",
-            "description" => "Живое онлайн сообщество программистов и разработчиков на JS, Python, Java, PHP, Ruby. Авторские программы обучения с практикой и готовыми проектами в резюме. Помощь в трудоустройстве после успешного окончания обучения"
+            "description" => trim(file_get_contents($this->getFilePath('description.txt')), "\n")
         ];
 
         $response = $this->post(route('urls.checks.store', $urlId));
