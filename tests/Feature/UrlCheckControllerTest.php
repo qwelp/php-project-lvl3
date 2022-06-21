@@ -23,7 +23,12 @@ class UrlCheckControllerTest extends TestCase
             ]
         );
 
-        $expectedData = (array) json_decode(file_get_contents($this->getFilePath('testStoreDescription.json')), true);
+        $expectedData = json_decode(file_get_contents($this->getFilePath('testStoreDescription.json')), true);
+
+        if ($expectedData === false) {
+            return;
+        }
+
         $response = $this->post(route('urls.checks.store', $urlId));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();

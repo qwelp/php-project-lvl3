@@ -14,6 +14,10 @@ class UrlController extends Controller
             ->join('url_checks', 'urls.id', '=', 'url_checks.url_id')
             ->paginate(5);
 
+        echo "<pre>";
+        print_r($urls);
+        echo "</pre>";
+
         return view('urls.index', compact('urls'));
     }
 
