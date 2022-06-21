@@ -23,18 +23,10 @@ class UrlCheckControllerTest extends TestCase
             ]
         );
 
-        $expectedData = [
-            "url_id" => 1,
-            "status_code" => 200,
-            "h1" => "Онлайн-школа программирования, за выпускниками которой охотятся компании\n",
-            "title" => "Хекслет — больше чем школа программирования. Онлайн курсы, сообщество программистов",
-            "description" => trim(file_get_contents($this->getFilePath('description.txt')), "\n")
-        ];
-
+        $expectedData = json_decode(file_get_contents($this->getFilePath('testStoreDescription.json')), true);
         $response = $this->post(route('urls.checks.store', $urlId));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
-
         $this->assertDatabaseHas('url_checks', $expectedData);
     }
 }
