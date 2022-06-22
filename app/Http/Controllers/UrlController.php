@@ -10,11 +10,15 @@ class UrlController extends Controller
 {
     public function index()
     {
-        $urls = DB::table('urls')
-            ->join('url_checks', 'urls.id', '=', 'url_checks.url_id')
-            ->paginate(5);
+        $urls = DB::table('urls')->paginate(5);
+        $lastChecks = DB::table('url_checks')
+            ->orderBy('url_id')
+            ->latest()
+            ->distinct('url_id')
+            ->get()
+            ->keyBy('url_id');
 
-        return view('urls.index', compact('urls'));
+        return view('urls.index', compact('urls', 'lastChecks'));
     }
 
     public function store(Request $request)
@@ -56,7 +60,7 @@ class UrlController extends Controller
         $urlChecks = DB::table('url_checks')
             ->where('url_id', $id)
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(50);
 
         return view('urls.show', compact('url', 'urlChecks'));
     }
