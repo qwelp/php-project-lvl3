@@ -42,8 +42,6 @@ class UrlControllerTest extends TestCase
         $url = DB::table('urls')->where('name', $domen)->limit(1)->get();
 
         $response->assertRedirect(route('urls.show', ['url' => $url[0]->id]));
-
-        
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('urls', ['name' => $domen]);
     }
