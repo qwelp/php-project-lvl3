@@ -24,7 +24,7 @@ class UrlCheckControllerTest extends TestCase
         );
 
         $fixtureStore = file_get_contents($this->getFilePath('testStoreDescription.json'));
-        $expectedData = json_decode($fixtureStore, true, $depth = 512, JSON_THROW_ON_ERROR);
+        $expectedData = (array) json_decode($fixtureStore, true);
 
         $response = $this->post(route('urls.checks.store', $urlId));
         $response->assertSessionHasNoErrors();

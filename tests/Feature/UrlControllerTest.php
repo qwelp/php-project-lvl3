@@ -39,8 +39,7 @@ class UrlControllerTest extends TestCase
         ];
 
         $response = $this->post(route('urls.store'), $data);
-        $url = DB::table('urls')->where('name', $domen)->first();
-        $urlId = $url->id;
+        $urlId = (int) DB::table('urls')->where('name', $domen)->first()->id;
 
         $response->assertRedirect(route('urls.show', ['url' => $urlId]));
         $response->assertSessionHasNoErrors();
