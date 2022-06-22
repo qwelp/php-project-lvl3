@@ -23,10 +23,11 @@ class UrlCheckControllerTest extends TestCase
             ]
         );
 
-        $expectedData = json_decode(file_get_contents($this->getFilePath('testStoreDescription.json')), true);
+        $fixtureStore = file_get_contents($this->getFilePath('testStoreDescription.json'));
+        $expectedData = json_decode($fixtureStore, true);
 
         if ($expectedData === false) {
-            return;
+            return false;
         }
 
         $response = $this->post(route('urls.checks.store', $urlId));
