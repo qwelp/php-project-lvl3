@@ -32,6 +32,7 @@ class UrlControllerTest extends TestCase
     public function testStore()
     {
         $domen = 'https://hexlet.io';
+        
         $data = [
             'url' => [
                 'name' => $domen
