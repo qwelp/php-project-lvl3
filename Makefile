@@ -23,7 +23,7 @@ test:
 	php artisan test --testsuite=Feature --stop-on-failure
 
 test-coverage:
-	XDEBUG_MODE=coverage php artisan test --coverage-clover build/logs/clover.xml
+	XDEBUG_MODE=coverage php artisan test --testsuite=Feature --coverage-clover build/logs/clover.xml
 
 deploy:
 	git push heroku
