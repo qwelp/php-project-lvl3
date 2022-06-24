@@ -38,7 +38,6 @@ class UrlController extends Controller
 
         $parsedUrl = parse_url($request['url.name']);
         $normalizedUrl = strtolower("{$parsedUrl['scheme']}://{$parsedUrl['host']}");
-
         $url = DB::table('urls')->where('name', $normalizedUrl)->first();
 
         if (is_null($url)) {
@@ -63,6 +62,7 @@ class UrlController extends Controller
         $url = DB::table('urls')->find($id);
 
         $messageError = __('messages.Page not found');
+        $messageError = $messageError ?: null;
 
         abort_unless($url, 404, $messageError);
 
