@@ -61,9 +61,7 @@ class UrlController extends Controller
     {
         $url = DB::table('urls')->find($id);
 
-        $messageError = __('messages.Page not found');
-        $messageError = $messageError ?? null;
-        abort_unless($url, 404, $messageError);
+        abort_unless($url, 404, __('Page_not_found'));
 
         $urlChecks = DB::table('url_checks')
             ->where('url_id', $id)

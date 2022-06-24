@@ -19,6 +19,7 @@ return [
     'The page has already been added' => 'Страница уже существует',
     'Page has been checked successfully' => 'Страница успешно проверена',
     'Page not found' => 'Страница не найдена',
+    'Page_not_found' => 'Page not found',
     'Page analyzer' => 'Анализатор страниц',
     'Main' => 'Главная',
     'Sites' => 'Сайты',
