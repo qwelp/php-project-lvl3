@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('flash::message')
     <div class="container-lg">
         <h1 class="mt-5 mb-3">{{ __('messages.Site') }}: {{ $url->name }}</h1>
         <table class="table table-bordered table-hover text-nowrap">

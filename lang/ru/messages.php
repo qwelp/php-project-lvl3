@@ -11,7 +11,10 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-
+    'required' => 'Обязательное поле',
+    'active_url' => 'Нужен адрес страницы',
+    'max_string' => 'Максимально кол-во символов 255',
+    'store.required' => 'store.required',
     'The page has been added successfully' => 'Страница успешно добавлена',
     'The page has already been added' => 'Страница уже существует',
     'Page has been checked successfully' => 'Страница успешно проверена',

@@ -10,7 +10,7 @@
 <body class="min-vh-100 d-flex flex-column">
 <header class="flex-shrink-0">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark px-3">
-        <a class="navbar-brand" href="{{ route('home') }}">Анализатор страниц.</a>
+        <a class="navbar-brand" href="{{ route('home') }}">{{ __('messages.Page analyzer')  }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,6 +28,16 @@
 </header>
 
 <main class="flex-grow-1">
+    @include('flash::message')
+
+    @if ($errors->any())
+        <div>
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger">{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
+
     @yield('content')
 </main>
 

@@ -2,17 +2,6 @@
 
 
 @section('content')
-
-@include('flash::message')
-
-@if ($errors->any())
-    <div>
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">{{ $error }}</div>
-        @endforeach
-    </div>
-@endif
-
 <div class="container-lg mt-3">
     <div class="row">
         <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
@@ -27,5 +16,4 @@
         </div>
     </div>
 </div>
-
 @endsection

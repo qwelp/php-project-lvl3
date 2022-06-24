@@ -3,30 +3,39 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use Tests\TestCase;
+use Exception;
 
 class UrlCheckControllerTest extends TestCase
 {
-    private function getFilePath(string $name): string
-    {
-        return __DIR__ . '/../fixtures/' . $name;
-    }
-
     public function testStore()
     {
-        $name = 'https://ru.hexlet.io';
-        $urlId = DB::table('urls')->insertGetId(
-            [
-                'name' => $name,
-                'created_at' => Carbon::now()
-            ]
-        );
+        $data = [
+            'name' => 'https://ru.hexlet.io',
+            'created_at' => Carbon::now(),
+        ];
 
-        $fixtureStore =  (string) file_get_contents($this->getFilePath('testStoreDescription.json'));
-        $expectedData = json_decode($fixtureStore, true);
+        $id = DB::table('urls')->insertGetId($data);
+        $pathToHtml = __DIR__ . '/../Fixtures/fake.html';
+        $content = file_get_contents($pathToHtml);
+        if ($content === false) {
+            throw new Exception('Something wrong with fixtures file');
+        }
 
-        $response = $this->post(route('urls.checks.store', $urlId));
+        Http::fake([$data['name'] => Http::response($content, 200)]);
+
+        $expectedData = [
+            'url_id' => $id,
+            'status_code' => 200,
+            'h1' => 'header',
+            'title' => 'example',
+            'description' => 'description',
+            'created_at' => Carbon::now()
+        ];
+
+        $response = $this->post(route('urls.checks.store', $id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
         $this->assertDatabaseHas('url_checks', $expectedData);
