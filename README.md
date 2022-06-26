@@ -4,6 +4,8 @@
 [![PHP CI](https://github.com/qwelp/php-project-lvl3/actions/workflows/workflow.yml/badge.svg)](https://github.com/qwelp/php-project-lvl3/actions/workflows/workflow.yml)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/c4c0885f7330e2f9f234/maintainability)](https://codeclimate.com/github/qwelp/php-project-lvl3/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c4c0885f7330e2f9f234/test_coverage)](https://codeclimate.com/github/qwelp/php-project-lvl3/test_coverage)
 ### Link to running application on Heroku:
 http://aqueous-sierra-67552.herokuapp.com/
 

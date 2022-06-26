@@ -25,14 +25,18 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $rules = ['url.name' => 'required|max:255|active_url'];
+
         $messages = [
             'required' => __('messages.required'),
             'active_url' => __('messages.active_url'),
             'max' => __('messages.max_string')
         ];
+
         Validator::make($request->all(), $rules, $messages)->validate();
+
         $parsedUrl = parse_url($request['url.name']);
         $normalizedUrl = strtolower("{$parsedUrl['scheme']}://{$parsedUrl['host']}");
+
         $url = DB::table('urls')->where('name', $normalizedUrl)->first();
 
         if (is_null($url)) {
@@ -48,9 +52,8 @@ class UrlController extends Controller
     public function show(int $id)
     {
         $url = DB::table('urls')->find($id);
-        $messageError = __('messages.Page not found');
-        $messageError = is_string($messageError) ? $messageError : '';
-        abort_unless($url, 404, $messageError);
+
+        abort_unless($url, 404);
 
         $urlChecks = DB::table('url_checks')
             ->where('url_id', $id)

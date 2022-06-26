@@ -33,5 +33,11 @@ return [
     'Check for free if sites can be used for SEO' => 'Бесплатно проверяйте сайты на SEO пригодность',
     'Check' => 'Проверить',
     'Checks' => 'Проверки',
-    'Incorrect URL' => 'Некорректный URL'
+    'Incorrect URL' => 'Некорректный URL',
+    'Name brand' => 'Hexlet',
+    'Title id' => 'ID',
+    'Title H1' => 'h1',
+    'Title title' => 'title',
+    'Title description' => 'description',
+    'Site empty address' => 'https://www.example.com',
 ];

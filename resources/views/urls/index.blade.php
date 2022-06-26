@@ -3,15 +3,15 @@
 
 @section('content')
     <div class="container-lg">
-        <h1 class="mt-5 mb-3">Сайты</h1>
+        <h1 class="mt-5 mb-3">{{ __('messages.Sites') }}</h1>
         <div class="table-responsive">
             <table class="table table-bordered table-hover text-nowrap">
                 <tbody>
                 <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
-                    <th>Последняя проверка</th>
-                    <th>Код ответа</th>
+                    <th>{{ __('messages.Title id') }}</th>
+                    <th>{{ __('messages.Name') }}</th>
+                    <th>{{ __('messages.Last check') }}</th>
+                    <th>{{ __('messages.Status code') }}</th>
                 </tr>
                 @if ($urls)
                     @foreach($urls as $url)

@@ -39,10 +39,16 @@ class UrlControllerTest extends TestCase
         ];
 
         $response = $this->post(route('urls.store'), $data);
-        $url = DB::table('urls')->where('name', $domain)->first();
-        $id = $url->id ?? 0;
-        $response->assertRedirect(route('urls.show', ['url' => $id]));
         $response->assertSessionHasNoErrors();
+
+        $queryDomain = DB::table('urls')->where('name', $domain);
+
+        if (!$queryDomain->exists()) {
+            throw new \Exception('There is no such record!');
+        }
+
+        $id = $queryDomain->value('id');
+        $response->assertRedirect(route('urls.show', ['url' => $id]));
         $this->assertDatabaseHas('urls', ['name' => $domain]);
     }
 

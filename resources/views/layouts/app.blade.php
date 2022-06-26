@@ -17,10 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->routeIs('urls.index') ? ' active' : '' }}" href="{{ route('home') }}">Главная</a>
+                    <a class="nav-link{{ request()->routeIs('urls.index') ? ' active' : '' }}" href="{{ route('home') }}">{{ __('messages.Main') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link{{ request()->routeIs('urls.index') ? ' active' : '' }}" href="{{ route('urls.index') }}">Сайты</a>
+                    <a class="nav-link{{ request()->routeIs('urls.index') ? ' active' : '' }}" href="{{ route('urls.index') }}">{{ __('messages.Sites') }}</a>
                 </li>
             </ul>
         </div>
@@ -29,22 +29,13 @@
 
 <main class="flex-grow-1">
     @include('flash::message')
-
-    @if ($errors->any())
-        <div>
-            @foreach ($errors->all() as $error)
-                <div class="alert alert-danger">{{ $error }}</div>
-            @endforeach
-        </div>
-    @endif
-
     @yield('content')
 </main>
 
 <footer class="border-top py-3 mt-5 flex-shrink-0">
     <div class="container-lg">
         <div class="text-center">
-            <a href="https://hexlet.io/pages/about" target="_blank">Hexlet</a>
+            <a href="https://hexlet.io/pages/about" target="_blank">{{ __('messages.Name brand') }}</a>
         </div>
     </div>
 </footer>

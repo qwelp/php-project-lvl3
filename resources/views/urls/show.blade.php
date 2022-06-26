@@ -5,7 +5,7 @@
         <h1 class="mt-5 mb-3">{{ __('messages.Site') }}: {{ $url->name }}</h1>
         <table class="table table-bordered table-hover text-nowrap">
             <tr>
-                <td style="width: 200px">ID</td>
+                <td style="width: 200px">{{ __('messages.Title id') }}</td>
                 <th>{{ $url->id }}</th>
             </tr>
             <tr>
@@ -23,11 +23,11 @@
         {{ Form::close() }}
         <table class="table table-bordered table-hover text-nowrap">
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col">{{ __('messages.Title id') }}</th>
                 <th scope="col">{{ __('messages.Status code') }}</th>
-                <th scope="col">h1</th>
-                <th scope="col">title</th>
-                <th scope="col">description</th>
+                <th scope="col">{{ __('messages.Title H1') }}</th>
+                <th scope="col">{{ __('messages.Title title') }}</th>
+                <th scope="col">{{ __('messages.Title description') }}</th>
                 <th scope="col">{{ __('messages.Date of creation') }}</th>
             </tr>
             @if ($urlChecks)
