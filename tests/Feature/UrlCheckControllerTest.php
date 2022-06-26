@@ -10,6 +10,9 @@ use Exception;
 
 class UrlCheckControllerTest extends TestCase
 {
+    private array $data;
+    private int $id;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -19,7 +22,7 @@ class UrlCheckControllerTest extends TestCase
             'created_at' => Carbon::now(),
         ];
 
-        $this->data['id'] = DB::table('urls')->insertGetId($this->data);
+        $this->id = DB::table('urls')->insertGetId($this->data);
     }
 
     public function testStore()
@@ -32,12 +35,12 @@ class UrlCheckControllerTest extends TestCase
 
         Http::fake([$this->data['name'] => Http::response($content, 200)]);
 
-        $response = $this->post(route('urls.checks.store', $this->data['id']));
+        $response = $this->post(route('urls.checks.store', $this->id));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $expectedData = [
-            'url_id' => $this->data['id'],
+            'url_id' => $this->id,
             'status_code' => 200,
             'h1' => 'header',
             'title' => 'example',
