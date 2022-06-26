@@ -19,7 +19,7 @@ class UrlCheckControllerTest extends TestCase
             'created_at' => Carbon::now(),
         ];
 
-        $this->id = DB::table('urls')->insertGetId($this->data);
+        $this->data['id'] = DB::table('urls')->insertGetId($this->data);
     }
 
     public function testStore()
@@ -32,12 +32,12 @@ class UrlCheckControllerTest extends TestCase
 
         Http::fake([$this->data['name'] => Http::response($content, 200)]);
 
-        $response = $this->post(route('urls.checks.store', $this->id));
+        $response = $this->post(route('urls.checks.store', $this->data['id']));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $expectedData = [
-            'url_id' => $this->id,
+            'url_id' => $this->data['id'],
             'status_code' => 200,
             'h1' => 'header',
             'title' => 'example',
